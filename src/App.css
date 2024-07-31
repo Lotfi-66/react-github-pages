@@ -110,3 +110,19 @@ li {
 .tech-sphere .icon {
     animation: glow 2s infinite;
 }
+
+.skills-section h3 {
+    margin-bottom: 2rem; /* Ajustez cette valeur selon l'espacement souhaité */
+}
+
+.skills-section .skills {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Ajustez cette valeur si nécessaire */
+}
+
+.specific-container {
+    width: 100%;
+    overflow: visible; /* Permet au contenu de déborder si nécessaire */
+}

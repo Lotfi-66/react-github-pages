@@ -21,7 +21,7 @@ function App() {
                         ce qui me permet de créer des applications web complètes et performantes.</p>
                 </section>
                 <section>
-                    <h3>Mes compétences</h3><br></br>
+                    <h3>Mes compétences</h3>
                     <div className="skills specific-container"> {/* Ajout de la classe spécifique-container */}
                         <TechSphere />
                     </div>
