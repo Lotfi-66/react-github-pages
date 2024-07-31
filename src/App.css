@@ -5,16 +5,10 @@ html {
     padding: 0;
     font-family: Arial, sans-serif;
     color: white;
-    background-color: transparent;
+    background-color: #000;
+    /* Gardez cela pour le fond de secours */
     height: 100%;
     overflow: hidden;
-}
-
-.content-overlay {
-    position: relative;
-    min-height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7);
-    overflow-y: auto;
 }
 
 .App {
@@ -22,16 +16,16 @@ html {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
+    /* Utiliser toute la hauteur de l'écran */
+    position: relative;
+    /* Pour que le contenu soit au-dessus du fond étoilé */
+    z-index: 1;
+    /* Assurez-vous que le contenu est au-dessus du canvas */
 }
 
 .App-header {
-    margin-bottom: 40px;
-}
-
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 h2 {
@@ -48,22 +42,23 @@ main {
 
 section {
     margin: 10px 0;
-    padding: 20px;
+    padding: 10px;
     flex: 1;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Ajoutez un fond semi-transparent */
     border-radius: 10px;
+    /* Arrondir les coins */
 }
 
 h3,
 h4 {
     font-size: 1.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 p {
     font-size: 1rem;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 ul {
@@ -72,10 +67,7 @@ ul {
 }
 
 li {
-    margin-bottom: 15px;
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 10px;
-    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .skills {
@@ -85,34 +77,16 @@ li {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
 }
 
 .social-links a {
     color: white;
     text-decoration: none;
     font-size: 1rem;
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.social-links a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .social-links a svg {
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 /* Styles pour TechSphere */
@@ -149,10 +123,6 @@ li {
 
 /* Media Queries pour la responsivité */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2rem;
-    }
-
     h2 {
         font-size: 1.5rem;
     }
@@ -167,14 +137,11 @@ li {
 
     .skills {
         height: 150px;
+        /* Ajustez la hauteur pour les écrans plus petits */
     }
 }
 
 @media (max-width: 480px) {
-    h1 {
-        font-size: 1.8rem;
-    }
-
     h2 {
         font-size: 1.2rem;
     }
@@ -189,14 +156,11 @@ li {
 
     .skills {
         height: 100px;
+        /* Ajustez la hauteur pour les petits écrans */
     }
 
     .social-links {
         flex-direction: column;
-        align-items: center;
-    }
-
-    .social-links a {
-        width: 80%;
+        gap: 10px;
     }
 }
