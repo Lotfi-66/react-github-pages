@@ -1,51 +1,10 @@
 import React from 'react';
 import StarryBackground from './StarryBackground';
 import { FaReact, FaJs, FaGithub, FaPhp, FaBootstrap, FaLinkedin } from 'react-icons/fa';
-import { SiJavascript } from 'react-icons/si';
-import { TagCloud } from 'react-tagcloud';
+import TechSphere from './components/TechSphere';
 import './App.css';
 
 function App() {
-    const skillsData = [
-        { value: 'React', count: 25, key: 'react' },
-        { value: 'JavaScript', count: 18, key: 'js' },
-        { value: 'PHP', count: 30, key: 'php' },
-        { value: 'Bootstrap', count: 20, key: 'bootstrap' },
-        { value: 'GitHub', count: 15, key: 'github' },
-    ];
-
-    const customRenderer = (tag, size, color) => {
-        const fontSize = size + 'px';
-        const key = tag.key;
-        let icon;
-
-        switch (key) {
-            case 'react':
-                icon = <FaReact />;
-                break;
-            case 'js':
-                icon = <FaJs />;
-                break;
-            case 'php':
-                icon = <FaPhp />;
-                break;
-            case 'bootstrap':
-                icon = <FaBootstrap />;
-                break;
-            case 'github':
-                icon = <FaGithub />;
-                break;
-            default:
-                icon = null;
-        }
-
-        return (
-            <span key={tag.value} style={{ fontSize, margin: '3px', display: 'inline-block' }}>
-                {icon}
-            </span>
-        );
-    };
-
     return (
         <div className="App">
             <StarryBackground />
@@ -63,22 +22,7 @@ function App() {
                 <section>
                     <h3>Mes compétences</h3>
                     <div className="skills">
-                        <div className="skills-static">
-                            <FaReact title="React" />
-                            <FaJs title="JavaScript" />
-                            <FaPhp title="PHP" />
-                            <FaBootstrap title="Bootstrap" />
-                            <FaGithub title="GitHub" />
-                        </div>
-                        <div className="skills-sphere">
-                            <TagCloud
-                                minSize={12}
-                                maxSize={35}
-                                tags={skillsData}
-                                renderer={customRenderer}
-                                onClick={tag => console.log('clicking on tag:', tag)}
-                            />
-                        </div>
+                        <TechSphere />
                     </div>
                 </section>
                 <section>

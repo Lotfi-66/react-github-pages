@@ -36,7 +36,6 @@ const TechSphere = () => {
             <FaPhp className="icon" />
             <FaBootstrap className="icon" />
             <FaGithub className="icon" />
-            <FaNodeJs className="icon" />
         </div>
     );
 };
