@@ -64,3 +64,20 @@ li {
 .social-links a svg {
     margin-right: 5px;
 }
+
+.tech-sphere {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    perspective: 1000px;
+}
+
+.tech-sphere .icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 2rem;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+}

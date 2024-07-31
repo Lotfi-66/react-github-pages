@@ -1,8 +1,8 @@
 // src/App.js
 import React from 'react';
 import StarryBackground from './StarryBackground';
-import { FaReact, FaJs, FaGithub, FaPhp, FaBootstrap, FaLinkedin } from 'react-icons/fa';
-import { SiJavascript } from 'react-icons/si';
+import TechSphere from './components/TechSphere';
+import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import './App.css';
 
 function App() {
@@ -19,16 +19,8 @@ function App() {
                     <p>Je m'appelle Lotfi Djeghbala, j'ai 21 ans et je suis un développeur web fullstack passionné. Je maîtrise à la fois le front-end et le back-end, ce qui me permet de créer des applications web complètes et performantes.</p>
                 </section>
                 <section>
-                    <h2>Mes compétences</h2>
-                    <div className="skills">
-                        <FaReact title="React" />
-                        <FaJs title="JavaScript" />
-                        <SiJavascript title="JavaScript Objet" />
-                        <FaPhp title="PHP" />
-                        <FaPhp title="PHP POO" />
-                        <FaBootstrap title="Bootstrap" />
-                        <FaGithub title="GitHub" />
-                    </div>
+                    <h2>Technologies Utilisées</h2>
+                    <TechSphere />
                 </section>
                 <section>
                     <h2>Mes projets</h2>
