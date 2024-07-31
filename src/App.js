@@ -1,7 +1,7 @@
 // src/App.js
 import React from 'react';
 import StarryBackground from './StarryBackground';
-import TechSphere from './TechSphere';
+import TechSphere from './components/TechSphere';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import './App.css';
 
