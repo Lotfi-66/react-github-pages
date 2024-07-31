@@ -16,7 +16,9 @@ function App() {
             <main>
                 <section>
                     <h3>À propos de moi</h3>
-                    <p>Je m'appelle Lotfi Djeghbala, j'ai 21 ans et je suis un développeur web fullstack passionné. Je maîtrise à la fois le front-end et le back-end, ce qui me permet de créer des applications web complètes et performantes.</p>
+                    <p>Je m'appelle Lotfi Djeghbala, j'ai 21 ans et je suis un développeur <br></br> 
+                    web fullstack passionné. Je maîtrise à la fois le front-end et le back-end,<br></br>
+                    ce qui me permet de créer des applications web complètes et performantes.</p>
                 </section>
                 <section>
                     <h3>Mes compétences</h3>
