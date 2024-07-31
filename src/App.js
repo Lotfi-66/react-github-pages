@@ -1,3 +1,4 @@
+// src/App.js
 import React from 'react';
 import StarryBackground from './StarryBackground';
 import { FaReact, FaJs, FaGithub, FaPhp, FaBootstrap, FaLinkedin } from 'react-icons/fa';
@@ -20,8 +21,8 @@ function App() {
                         ce qui me permet de créer des applications web complètes et performantes.</p>
                 </section>
                 <section>
-                    <h3>Mes compétences</h3>
-                    <div className="skills">
+                    <h3>Mes compétences</h3><br></br>
+                    <div className="skills specific-container"> {/* Ajout de la classe spécifique-container */}
                         <TechSphere />
                     </div>
                 </section>

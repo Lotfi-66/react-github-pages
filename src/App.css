@@ -1,9 +1,18 @@
 /* src/App.css */
+/* src/App.css */
+
+/* Masquer la barre de défilement pour l'ensemble de la page */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     color: white;
     background-color: #000;
+    overflow: hidden; /* Masquer la barre de défilement */
+}
+
+/* Si vous souhaitez masquer la barre de défilement pour un conteneur spécifique */
+.specific-container {
+    overflow: hidden; /* Masquer la barre de défilement */
 }
 
 .App {
