@@ -1,7 +1,7 @@
 // src/App.js
 import React from 'react';
 import StarryBackground from './StarryBackground';
-import TechSphere from './components/TechSphere';
+import TechSphere from './TechSphere';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import './App.css';
 
@@ -36,7 +36,7 @@ function App() {
                     <h2>Contact</h2>
                     <p>Email: lotfi.djeg@gmail.com</p>
                     <div className="social-links">
-                        <a href="https://www.linkedin.com/in/lotfi-djeghbala-63160a266" target="_blank" rel="noopener noreferrer">
+                        <a href="https://linkedin.com/in/votre-profil-linkedin" target="_blank" rel="noopener noreferrer">
                             <FaLinkedin /> LinkedIn
                         </a>
                         <a href="https://github.com/Lotfi-66" target="_blank" rel="noopener noreferrer">
