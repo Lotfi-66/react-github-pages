@@ -1,41 +1,58 @@
 /* src/App.css */
-/* src/App.css */
-
-/* Masquer la barre de défilement pour l'ensemble de la page */
-body {
+body,
+html {
     margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
     color: white;
     background-color: #000;
-    overflow: hidden; /* Masquer la barre de défilement */
-}
-
-/* Si vous souhaitez masquer la barre de défilement pour un conteneur spécifique */
-.specific-container {
-    overflow: hidden; /* Masquer la barre de défilement */
+    height: 100%;
 }
 
 .App {
     text-align: center;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    /* Utiliser toute la hauteur de l'écran */
 }
 
 .App-header {
-    margin-bottom: 40px;
-}
-
-h1 {
-    font-size: 3rem;
     margin-bottom: 20px;
 }
 
 h2 {
     font-size: 2rem;
-    margin-top: 40px;
+    margin-top: 20px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* Espacement uniforme entre les sections */
 }
 
 section {
-    margin-bottom: 40px;
+    margin: 10px 0;
+    /* Espacement vertical entre les sections */
+    padding: 10px;
+    /* Espacement interne */
+    flex: 1;
+    /* Permet aux sections de prendre une part égale de l'espace disponible */
+}
+
+h3,
+h4 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
 ul {
@@ -47,15 +64,20 @@ li {
     margin-bottom: 10px;
 }
 
+.skills-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .skills {
+    width: 100%;
+    max-width: 300px;
+    height: 200px;
+    /* Ajustez la hauteur pour s'adapter à l'écran */
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    font-size: 2rem;
-    margin-top: 20px;
-    height: 300px;
-    /* Ajustez cette valeur selon vos besoins */
 }
 
 .social-links {
@@ -70,7 +92,7 @@ li {
     align-items: center;
     color: white;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .social-links a svg {
@@ -79,9 +101,8 @@ li {
 
 /* Styles pour TechSphere */
 .tech-sphere {
-    position: relative;
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
     perspective: 1000px;
 }
 
@@ -92,7 +113,6 @@ li {
     transition: transform 0.3s ease-out;
 }
 
-/* Animation pour faire briller les icônes */
 @keyframes glow {
     0% {
         filter: drop-shadow(0 0 2px rgba(97, 218, 251, 0.7));
@@ -111,18 +131,46 @@ li {
     animation: glow 2s infinite;
 }
 
-.skills-section h3 {
-    margin-bottom: 2rem; /* Ajustez cette valeur selon l'espacement souhaité */
+/* Media Queries pour la responsivité */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    .skills {
+        height: 150px;
+        /* Ajustez la hauteur pour les écrans plus petits */
+    }
 }
 
-.skills-section .skills {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 300px; /* Ajustez cette valeur si nécessaire */
-}
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.2rem;
+    }
 
-.specific-container {
-    width: 100%;
-    overflow: visible; /* Permet au contenu de déborder si nécessaire */
+    h3 {
+        font-size: 1rem;
+    }
+
+    p {
+        font-size: 0.8rem;
+    }
+
+    .skills {
+        height: 100px;
+        /* Ajustez la hauteur pour les petits écrans */
+    }
+
+    .social-links {
+        flex-direction: column;
+        gap: 10px;
+    }
 }

@@ -14,11 +14,9 @@ function App() {
                 <p>Développeur Web Fullstack</p>
             </header>
             <main>
-                <section>
+                <section className="about-section">
                     <h3>À propos de moi</h3>
-                    <p>Je m'appelle Lotfi Djeghbala, j'ai 21 ans et je suis un développeur <br></br>
-                        web fullstack passionné. Je maîtrise à la fois le front-end et le back-end,<br></br>
-                        ce qui me permet de créer des applications web complètes et performantes.</p>
+                    <p>Je m'appelle Lotfi Djeghbala, j'ai 21 ans et je suis un développeur web fullstack passionné. Je maîtrise à la fois le front-end et le back-end, ce qui me permet de créer des applications web complètes et performantes.</p>
                 </section>
                 <section className="skills-section">
                     <h3>Mes compétences</h3>
@@ -26,7 +24,7 @@ function App() {
                         <TechSphere />
                     </div>
                 </section>
-                <section>
+                <section className="projects-section">
                     <h3>Mes projets</h3>
                     <ul>
                         <li>Site Airbnb - PHP Orienté Objet/Bootstrap</li>
@@ -34,7 +32,7 @@ function App() {
                         <li>100&or - JavaScript Orienté Objet/Bootstrap</li>
                     </ul>
                 </section>
-                <section>
+                <section className="contact-section">
                     <h4>Contact</h4>
                     <p>Email: lotfi.djeg@gmail.com</p>
                     <div className="social-links">
