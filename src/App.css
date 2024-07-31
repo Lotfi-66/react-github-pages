@@ -1,28 +1,17 @@
 /* src/App.css */
-body,
-html {
+body, html {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    color: white;
-    background-color: #000;
-    /* Gardez cela pour le fond de secours */
     height: 100%;
-    overflow: hidden;
+    background-color: transparent;
 }
 
 .App {
-    text-align: center;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    /* Utiliser toute la hauteur de l'écran */
     position: relative;
-    /* Pour que le contenu soit au-dessus du fond étoilé */
     z-index: 1;
-    /* Assurez-vous que le contenu est au-dessus du canvas */
+    background-color: transparent;
 }
+
 
 .App-header {
     margin-bottom: 20px;
