@@ -20,9 +20,9 @@ function App() {
                         web fullstack passionné. Je maîtrise à la fois le front-end et le back-end,<br></br>
                         ce qui me permet de créer des applications web complètes et performantes.</p>
                 </section>
-                <section>
+                <section className="skills-section">
                     <h3>Mes compétences</h3>
-                    <div className="skills specific-container"> {/* Ajout de la classe spécifique-container */}
+                    <div className="skills specific-container">
                         <TechSphere />
                     </div>
                 </section>
