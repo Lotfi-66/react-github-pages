@@ -1,83 +1,40 @@
-/* src/App.css */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    color: white;
-    background-color: #000;
-}
+/* App.css */
 
-.App {
-    text-align: center;
+.main-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
 }
 
-.App-header {
+.top-sections {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 40px;
 }
 
-h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
+.left-section, .right-section {
+    width: 48%;
 }
 
-h2 {
-    font-size: 2rem;
-    margin-top: 40px;
-}
-
-section {
+.bottom-section {
     margin-bottom: 40px;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+.contact-section {
+    text-align: center;
 }
 
-li {
-    margin-bottom: 10px;
+@media (max-width: 768px) {
+    .top-sections {
+        flex-direction: column;
+    }
+
+    .left-section, .right-section {
+        width: 100%;
+        margin-bottom: 20px;
+    }
 }
 
-.skills {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    font-size: 2rem;
-    margin-top: 20px;
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.social-links a {
-    display: flex;
-    align-items: center;
-    color: white;
-    text-decoration: none;
-    font-size: 1.2rem;
-}
-
-.social-links a svg {
-    margin-right: 5px;
-}
-
-.tech-sphere {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    margin: 0 auto;
-    perspective: 1000px;
-}
-
-.tech-sphere .icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 2rem;
-    transform-style: preserve-3d;
-    transition: transform 0.5s;
-}
+/* Ajustez ces styles selon vos besoins */
