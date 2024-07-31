@@ -9,13 +9,13 @@ const TechSphere = () => {
         const sphere = sphereRef.current;
         const icons = sphere.children;
         const totalIcons = icons.length;
-        const radius = 100; // Adjust this value to change the size of the sphere
+        const radius = 100;
 
         let angle = 0;
         const angleStep = (2 * Math.PI) / totalIcons;
 
         const animate = () => {
-            angle += 0.01; // Adjust this value to change the rotation speed
+            angle += 0.01;
             for (let i = 0; i < totalIcons; i++) {
                 const icon = icons[i];
                 const x = radius * Math.cos(angle + i * angleStep);
