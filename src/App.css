@@ -59,14 +59,15 @@ h2 {
     z-index: 2;
 }
 
-.top-sections {
+.content-sections {
     display: flex;
     justify-content: space-between;
     margin-bottom: 40px;
 }
 
 .left-column {
-    width: 48%;
+    width: 60%;
+    /* Ajustez cette valeur selon vos besoins */
 }
 
 .left-section,
@@ -78,7 +79,8 @@ h2 {
 }
 
 .right-section {
-    width: 48%;
+    width: 35%;
+    /* Ajustez cette valeur selon vos besoins */
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -154,7 +156,7 @@ h2 {
 }
 
 @media (max-width: 768px) {
-    .top-sections {
+    .content-sections {
         flex-direction: column;
     }
 

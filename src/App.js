@@ -19,7 +19,7 @@ function App() {
                         Je maîtrise à la fois le front-end et le back-end, ce qui me permet <br></br>
                         de créer des applications web complètes et performantes.</p>
                 </section>
-                <div className="top-sections">
+                <div className="content-sections">
                     <div className="left-column">
                         <section className="left-section">
                             <h2>Mes compétences</h2>
