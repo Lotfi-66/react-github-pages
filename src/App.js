@@ -13,42 +13,58 @@ function App() {
                 <h1>Lotfi Djeghbala</h1>
                 <p>Développeur Web Fullstack</p>
             </header>
-            <main>
-                <section>
+            <main className="main-content">
+                <section className="about-section">
                     <h2>À propos de moi</h2>
                     <p>Je m'appelle Lotfi Djeghbala, j'ai 21 ans et je suis un développeur web fullstack passionné. <br></br>
-                    Je maîtrise à la fois le front-end et le back-end, ce qui me permet <br></br>
-                    de créer des applications web complètes et performantes.</p>
+                        Je maîtrise à la fois le front-end et le back-end, ce qui me permet <br></br>
+                        de créer des applications web complètes et performantes.</p>
                 </section>
-                <section>
-                    <h2>Mes compétences</h2>
-                    <div className="skills">
-                        <FaReact title="React" />
-                        <FaJs title="JavaScript" />
-                        <FaPhp title="PHP" />
-                        <FaBootstrap title="Bootstrap" />
-                        <FaGithub title="GitHub" />
-                    </div>
-                </section>
-                <section>
+                <div className="top-sections">
+                    <section className="left-section">
+                        <h2>Mes compétences</h2>
+                        <div className="skills">
+                            <FaReact title="React" />
+                            <FaJs title="JavaScript" />
+                            <FaPhp title="PHP" />
+                            <FaBootstrap title="Bootstrap" />
+                            <FaGithub title="GitHub" />
+                        </div>
+                    </section>
+                    <section className="right-section">
+                        <h2>Contact</h2>
+                        <form className="contact-form">
+                            <div>
+                                <label htmlFor="name">Nom:</label>
+                                <input type="text" id="name" name="name" />
+                            </div>
+                            <div>
+                                <label htmlFor="email">Email:</label>
+                                <input type="email" id="email" name="email" />
+                            </div>
+                            <div>
+                                <label htmlFor="message">Message:</label>
+                                <textarea id="message" name="message"></textarea>
+                            </div>
+                            <button type="submit">Envoyer</button>
+                        </form>
+                        <div className="social-links">
+                            <a href="https://linkedin.com/in/lotfi-djeghbala-63160a266" target="_blank" rel="noopener noreferrer">
+                                <FaLinkedin /> LinkedIn
+                            </a>
+                            <a href="https://github.com/Lotfi-66" target="_blank" rel="noopener noreferrer">
+                                <FaGithub /> GitHub
+                            </a>
+                        </div>
+                    </section>
+                </div>
+                <section className="bottom-section">
                     <h2>Mes projets</h2>
                     <ul>
                         <li>Projet 1 - Application React avec backend PHP</li>
                         <li>Projet 2 - Site e-commerce en JavaScript et Bootstrap</li>
                         <li>Projet 3 - API RESTful en PHP orienté objet</li>
                     </ul>
-                </section>
-                <section>
-                    <h2>Contact</h2>
-                    <p>Email: lotfi.djeg@gmail.com</p>
-                    <div className="social-links">
-                        <a href="https://linkedin.com/in/votre-profil-linkedin" target="_blank" rel="noopener noreferrer">
-                            <FaLinkedin /> LinkedIn
-                        </a>
-                        <a href="https://github.com/votre-profil-github" target="_blank" rel="noopener noreferrer">
-                            <FaGithub /> GitHub
-                        </a>
-                    </div>
                 </section>
             </main>
         </div>

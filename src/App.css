@@ -1,14 +1,21 @@
-/* src/App.css */
-body {
+/* App.css */
+
+body,
+html {
     margin: 0;
-    font-family: Arial, sans-serif;
-    color: white;
-    background-color: #000;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: #ffffff;
+    background-color: #000000;
+    line-height: 1.6;
 }
 
 .App {
     text-align: center;
-    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .App-header {
@@ -17,12 +24,22 @@ body {
 
 h1 {
     font-size: 3rem;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
     margin-bottom: 20px;
+    color: #cccccc;
 }
 
 h2 {
     font-size: 2rem;
     margin-top: 40px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ffffff;
+    padding-bottom: 10px;
 }
 
 section {
@@ -36,6 +53,93 @@ ul {
 
 li {
     margin-bottom: 10px;
+}
+
+a {
+    color: #4da6ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #66b3ff;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.top-sections {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.left-section,
+.right-section {
+    width: 48%;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-form div {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    margin-bottom: 5px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.contact-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4da6ff;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #66b3ff;
+}
+
+.bottom-section {
+    margin-bottom: 40px;
+}
+
+.contact-section {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .top-sections {
+        flex-direction: column;
+    }
+
+    .left-section,
+    .right-section {
+        width: 100%;
+        margin-bottom: 20px;
+    }
 }
 
 .skills {
