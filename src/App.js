@@ -16,7 +16,7 @@ function App() {
             </header>
             <main className="main-content">
                 <div className="content-wrapper">
-                    <div className="left-column position-absolute left-0">
+                    <div className="left-column position-absolute l-0">
                         <section className="skills-section">
                             <h2>Mes compétences</h2>
                             <div className="skills">
