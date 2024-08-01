@@ -7,7 +7,7 @@ html {
     font-family: 'Arial', sans-serif;
     color: #ffffff;
     background-color: transparent;
-    /* Changé de #000000 à transparent */
+    /* Fond transparent pour permettre à l'étoile d'être visible */
     line-height: 1.6;
     overflow-x: hidden;
 }

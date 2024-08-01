@@ -2,7 +2,6 @@
 import React from 'react';
 import StarryBackground from './StarryBackground';
 import { FaReact, FaJs, FaGithub, FaPhp, FaBootstrap, FaLinkedin } from 'react-icons/fa';
-import { SiJavascript } from 'react-icons/si';
 import './App.css';
 
 function App() {
