@@ -9,6 +9,7 @@ const StarryBackground = () => {
         const ctx = canvas.getContext('2d');
         let animationFrameId;
 
+        // Ajuster la taille du canvas à la fenêtre
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -17,14 +18,19 @@ const StarryBackground = () => {
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        const stars = Array(200).fill().map(() => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            radius: Math.random() * 1.5,
-            vx: Math.floor(Math.random() * 50) - 25,
-            vy: Math.floor(Math.random() * 50) - 25
-        }));
+        // Créer les étoiles
+        const stars = [];
+        for (let i = 0; i < 100; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5,
+                vx: Math.floor(Math.random() * 50) - 25,
+                vy: Math.floor(Math.random() * 50) - 25
+            });
+        }
 
+        // Animer les étoiles
         const animate = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = 'white';
@@ -34,29 +40,22 @@ const StarryBackground = () => {
                 ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2, true);
                 star.x += star.vx / 30;
                 star.y += star.vy / 30;
-                if (star.x < 0 || star.x > canvas.width) star.x = Math.random() * canvas.width;
-                if (star.y < 0 || star.y > canvas.height) star.y = Math.random() * canvas.height;
+                if (star.x < 0 || star.x > canvas.width) star.vx = -star.vx;
+                if (star.y < 0 || star.y > canvas.height) star.vy = -star.vy;
             });
             ctx.fill();
-            animationFrameId = window.requestAnimationFrame(animate);
+            animationFrameId = requestAnimationFrame(animate);
         };
 
         animate();
 
         return () => {
-            window.cancelAnimationFrame(animationFrameId);
             window.removeEventListener('resize', resizeCanvas);
+            cancelAnimationFrame(animationFrameId);
         };
     }, []);
 
-    return <canvas ref={canvasRef} style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: -1
-    }} />;
+    return <canvas ref={canvasRef} style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }} />;
 };
 
 export default StarryBackground;
