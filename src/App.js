@@ -10,15 +10,11 @@ function App() {
             <StarryBackground />
             <header className="App-header">
                 <h1>Lotfi Djeghbala</h1>
-                <p>Développeur Web Fullstack</p>
+                <p>Je m'appelle Lotfi Djeghbala, j'ai 21 ans et je suis un développeur web fullstack passionné. <br />
+                    Je maîtrise à la fois le front-end et le back-end, ce qui me permet <br />
+                    de créer des applications web complètes et performantes.</p>
             </header>
             <main className="main-content">
-                <section className="about-section">
-                    <h2>À propos de moi</h2>
-                    <p>Je m'appelle Lotfi Djeghbala, j'ai 21 ans et je suis un développeur web fullstack passionné. <br />
-                        Je maîtrise à la fois le front-end et le back-end, ce qui me permet <br />
-                        de créer des applications web complètes et performantes.</p>
-                </section>
                 <div className="content-wrapper">
                     <div className="left-column">
                         <section className="skills-section">
