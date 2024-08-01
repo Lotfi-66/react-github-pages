@@ -20,16 +20,26 @@ function App() {
                         de créer des applications web complètes et performantes.</p>
                 </section>
                 <div className="top-sections">
-                    <section className="left-section">
-                        <h2>Mes compétences</h2>
-                        <div className="skills">
-                            <FaReact title="React" />
-                            <FaJs title="JavaScript" />
-                            <FaPhp title="PHP" />
-                            <FaBootstrap title="Bootstrap" />
-                            <FaGithub title="GitHub" />
-                        </div>
-                    </section>
+                    <div className="left-column">
+                        <section className="left-section">
+                            <h2>Mes compétences</h2>
+                            <div className="skills">
+                                <FaReact title="React" />
+                                <FaJs title="JavaScript" />
+                                <FaPhp title="PHP" />
+                                <FaBootstrap title="Bootstrap" />
+                                <FaGithub title="GitHub" />
+                            </div>
+                        </section>
+                        <section className="bottom-section">
+                            <h2>Mes projets</h2>
+                            <ul>
+                                <li>Projet 1 - Application React avec backend PHP</li>
+                                <li>Projet 2 - Site e-commerce en JavaScript et Bootstrap</li>
+                                <li>Projet 3 - API RESTful en PHP orienté objet</li>
+                            </ul>
+                        </section>
+                    </div>
                     <section className="right-section">
                         <h2>Contact</h2>
                         <form className="contact-form">
@@ -57,14 +67,6 @@ function App() {
                         </div>
                     </section>
                 </div>
-                <section className="bottom-section">
-                    <h2>Mes projets</h2>
-                    <ul>
-                        <li>Projet 1 - Application React avec backend PHP</li>
-                        <li>Projet 2 - Site e-commerce en JavaScript et Bootstrap</li>
-                        <li>Projet 3 - API RESTful en PHP orienté objet</li>
-                    </ul>
-                </section>
             </main>
         </div>
     );

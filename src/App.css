@@ -65,8 +65,16 @@ h2 {
     margin-bottom: 40px;
 }
 
-.left-section {
+.left-column {
     width: 48%;
+}
+
+.left-section,
+.bottom-section {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
 .right-section {
@@ -74,7 +82,6 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    /* Aligne le contenu à droite */
 }
 
 .contact-form {
@@ -85,7 +92,6 @@ h2 {
     padding: 20px;
     border-radius: 10px;
     width: 100%;
-    /* Prend toute la largeur de la section */
 }
 
 .contact-form div {
@@ -120,10 +126,6 @@ h2 {
     background-color: #66b3ff;
 }
 
-.bottom-section {
-    margin-bottom: 40px;
-}
-
 .skills {
     display: flex;
     justify-content: center;
@@ -156,7 +158,7 @@ h2 {
         flex-direction: column;
     }
 
-    .left-section,
+    .left-column,
     .right-section {
         width: 100%;
         margin-bottom: 20px;
