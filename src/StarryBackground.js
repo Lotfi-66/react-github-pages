@@ -9,7 +9,6 @@ const StarryBackground = () => {
         const ctx = canvas.getContext('2d');
         let animationFrameId;
 
-        // Ajuster la taille du canvas
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -18,7 +17,6 @@ const StarryBackground = () => {
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        // Créer les étoiles
         const stars = [];
         for (let i = 0; i < 200; i++) {
             stars.push({
@@ -30,7 +28,6 @@ const StarryBackground = () => {
             });
         }
 
-        // Animer les étoiles
         const animate = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = 'white';
