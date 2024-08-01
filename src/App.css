@@ -8,6 +8,7 @@ html {
     color: #ffffff;
     background-color: #000000;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 .App {
@@ -20,6 +21,8 @@ html {
 
 .App-header {
     margin-bottom: 40px;
+    z-index: 1;
+    position: relative;
 }
 
 h1 {
@@ -44,6 +47,8 @@ h2 {
 
 section {
     margin-bottom: 40px;
+    z-index: 1;
+    position: relative;
 }
 
 ul {
@@ -71,6 +76,8 @@ a:hover {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    z-index: 1;
+    position: relative;
 }
 
 .top-sections {
@@ -88,6 +95,10 @@ a:hover {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    /* Semi-transparent background */
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .contact-form div {
