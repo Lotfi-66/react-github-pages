@@ -9,7 +9,7 @@ const StarryBackground = () => {
         const ctx = canvas.getContext('2d');
         let animationFrameId;
 
-        // Ajuster la taille du canvas à la fenêtre
+        // Ajuster la taille du canvas
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -20,7 +20,7 @@ const StarryBackground = () => {
 
         // Créer les étoiles
         const stars = [];
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 200; i++) {
             stars.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
@@ -40,18 +40,18 @@ const StarryBackground = () => {
                 ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2, true);
                 star.x += star.vx / 30;
                 star.y += star.vy / 30;
-                if (star.x < 0 || star.x > canvas.width) star.vx = -star.vx;
-                if (star.y < 0 || star.y > canvas.height) star.vy = -star.vy;
+                if (star.x < 0 || star.x > canvas.width) star.x = Math.random() * canvas.width;
+                if (star.y < 0 || star.y > canvas.height) star.y = Math.random() * canvas.height;
             });
             ctx.fill();
-            animationFrameId = requestAnimationFrame(animate);
+            animationFrameId = window.requestAnimationFrame(animate);
         };
 
         animate();
 
         return () => {
+            window.cancelAnimationFrame(animationFrameId);
             window.removeEventListener('resize', resizeCanvas);
-            cancelAnimationFrame(animationFrameId);
         };
     }, []);
 
