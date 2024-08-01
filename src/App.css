@@ -16,7 +16,7 @@ html {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     position: relative;
     z-index: 1;
 }
@@ -52,47 +52,40 @@ h2 {
 
 .main-content {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     z-index: 2;
 }
 
-.content-sections {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
-}
-
 .left-column {
     width: 60%;
-    /* Ajustez cette valeur selon vos besoins */
+    display: flex;
+    flex-direction: column;
+}
+
+.right-column {
+    width: 35%;
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .left-section,
-.bottom-section {
+.bottom-section,
+.right-section {
     background-color: rgba(0, 0, 0, 0.7);
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
 }
 
-.right-section {
-    width: 35%;
-    /* Ajustez cette valeur selon vos besoins */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
 .contact-form {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 20px;
-    border-radius: 10px;
     width: 100%;
 }
 
@@ -156,13 +149,14 @@ h2 {
 }
 
 @media (max-width: 768px) {
-    .content-sections {
+    .main-content {
         flex-direction: column;
     }
 
     .left-column,
-    .right-section {
+    .right-column {
         width: 100%;
-        margin-bottom: 20px;
+        position: static;
+        transform: none;
     }
 }
