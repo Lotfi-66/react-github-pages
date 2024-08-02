@@ -8,7 +8,14 @@
     z-index: 1000; /* Assurez-vous que le vaisseau est au-dessus des autres éléments */
 }
 
-.vaisseau-spatial canvas {
-    pointer-events: auto;
-    cursor: pointer;
+
+/* src/VaisseauSpatial.css */
+.vaisseau-spatial {
+    position: absolute; /* ou fixed, selon vos besoins */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999; /* Z-index élevé pour être au-dessus des icônes */
+    pointer-events: true; /* Permet de cliquer à travers l'élément si nécessaire */
 }

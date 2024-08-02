@@ -5,29 +5,26 @@ import './VaisseauSpatial.css';
 
 const VaisseauSpatial = ({ onClick }) => {
     const mountRef = useRef(null);
+    const vaisseauDivRef = useRef(null);
     const animationRef = useRef(null);
     const timeRef = useRef(0);
-    const raycasterRef = useRef(new THREE.Raycaster());
-    const mouseRef = useRef(new THREE.Vector2());
 
     useEffect(() => {
         const mountNode = mountRef.current;
+        const vaisseauDiv = vaisseauDivRef.current;
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         mountNode.appendChild(renderer.domElement);
 
-        let vaisseau = null;
-
         // Charger le modèle 3D du vaisseau spatial
         const objLoader = new OBJLoader();
         objLoader.load(
-            process.env.PUBLIC_URL + '/models/3d-model.obj', // Assurez-vous que ce chemin est correct
+            process.env.PUBLIC_URL + '/models/3d-model.obj',
             (object) => {
-                object.scale.set(0.006, 0.006, 0.0008); // Ajustez si nécessaire
+                object.scale.set(0.006, 0.006, 0.0008);
 
-                // Appliquer un matériau métallique
                 object.traverse((child) => {
                     if (child instanceof THREE.Mesh) {
                         child.material = new THREE.MeshStandardMaterial({
@@ -40,7 +37,6 @@ const VaisseauSpatial = ({ onClick }) => {
                 });
 
                 scene.add(object);
-                vaisseau = object;
                 animationRef.current = object;
             },
             (xhr) => {
@@ -56,47 +52,46 @@ const VaisseauSpatial = ({ onClick }) => {
         scene.add(ambientLight);
 
         const frontLight = new THREE.DirectionalLight(0xffffff, 0.5);
-        frontLight.position.set(1, 1, 1); // Lumière venant du haut à droite
+        frontLight.position.set(1, 1, 1);
         scene.add(frontLight);
 
         const backLight = new THREE.DirectionalLight(0xffffff, 0.2);
-        backLight.position.set(-1, 1, 1); // Lumière venant du haut à droite
+        backLight.position.set(-1, 1, 1);
         scene.add(backLight);
 
-        // Positionner la caméra
         camera.position.z = 550;
 
-        // Animation
         const animate = () => {
             requestAnimationFrame(animate);
 
             if (animationRef.current) {
-                // Incrémentation du temps
-                timeRef.current += 0.001;
+                timeRef.current += 0.005;
                 const t = timeRef.current;
 
-                // Paramètres du mouvement en 8
-                const a = 75; // Taille du 8
-                const b = 400; // Largeur du 8
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                const a = width / 5;
+                const b = height / 8;
 
-                // Calcul de la position sur le trajet en 8
                 const x = a * Math.sin(t);
                 const y = b * Math.sin(t) * Math.cos(t);
+
                 animationRef.current.position.set(x, y, 0);
 
-                // Calcul de l'orientation du vaisseau dans la direction du mouvement
+                // Mettre à jour la position de la div cliquable
+                const vector = new THREE.Vector3(x, y, 0);
+                vector.project(camera);
+                const xx = (vector.x * 0.5 + 0.5) * width;
+                const yy = (-(vector.y * 0.5) + 0.5) * height;
+                vaisseauDiv.style.transform = `translate(${xx}px, ${yy}px)`;
+
                 const tangentX = a * Math.cos(t);
                 const tangentY = b * (Math.cos(t) * Math.cos(t) - Math.sin(t) * Math.sin(t));
                 const angle = Math.atan2(tangentY, tangentX);
 
-                // Rotation autour de l'axe Z pour suivre la trajectoire
                 animationRef.current.rotation.z = angle - Math.PI / 2;
-
-                // Rotation continue autour de l'axe Y
-                animationRef.current.rotation.y += 0.005; // Ajustez cette valeur pour contrôler la vitesse de rotation
-
-                // Rotation autour de l'axe X pour un effet supplémentaire (optionnel)
-                animationRef.current.rotation.x = Math.sin(t * 2) * 0.2; // Crée un léger basculement
+                animationRef.current.rotation.y += 0.004;
+                animationRef.current.rotation.x = Math.sin(t * 2) * 0.5;
             }
 
             renderer.render(scene, camera);
@@ -104,23 +99,6 @@ const VaisseauSpatial = ({ onClick }) => {
 
         animate();
 
-        // Gestion des clics
-        const handleMouseClick = (event) => {
-            const rect = mountNode.getBoundingClientRect();
-            mouseRef.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 0.5;
-            mouseRef.current.y = -((event.clientY - rect.top) / rect.height) * 2 + 0.5;
-
-            raycasterRef.current.setFromCamera(mouseRef.current, camera);
-            const intersects = raycasterRef.current.intersectObject(vaisseau, true);
-
-            if (intersects.length > 0) {
-                onClick();
-            }
-        };
-
-        mountNode.addEventListener('click', handleMouseClick);
-
-        // Gestion du redimensionnement
         const handleResize = () => {
             const width = window.innerWidth;
             const height = window.innerHeight;
@@ -133,12 +111,29 @@ const VaisseauSpatial = ({ onClick }) => {
 
         return () => {
             window.removeEventListener('resize', handleResize);
-            mountNode.removeEventListener('click', handleMouseClick);
             mountNode.removeChild(renderer.domElement);
         };
     }, [onClick]);
 
-    return <div ref={mountRef} style={{ cursor: 'pointer', width: '100%', height: '100%', position: 'absolute' }} />;
+    return (
+        <div ref={mountRef} className="vaisseau-spatial">
+            <div 
+                ref={vaisseauDivRef} 
+                className="vaisseau-clickable"
+                onClick={onClick}
+                style={{
+                    position: 'absolute',
+                    top: '-50px',
+                    left: '-30px',
+                    transform: 'translate(-50%, -50%)',
+                    width: '150px',
+                    height: '150px',
+                    cursor: 'pointer',
+                    background: 'transparent',
+                }}
+            />
+        </div>
+    );
 };
 
 export default VaisseauSpatial;
