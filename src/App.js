@@ -5,9 +5,7 @@ import VaisseauSpatial from './VaisseauSpatial';
 import './App.css';
 
 function App() {
-    const handleVaisseauClick = () => {
-        alert('Vaisseau spatial cliqué !');
-    };
+
 
     return (
         <div className="App">

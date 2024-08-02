@@ -23,7 +23,7 @@ const VaisseauSpatial = ({ onClick }) => {
         // Charger le modèle 3D du vaisseau spatial
         const objLoader = new OBJLoader();
         objLoader.load(
-            '/models/3d-model.obj', // Assurez-vous que ce chemin est correct
+             process.env.PUBLIC_URL + '/models/3d-model.obj', // Assurez-vous que ce chemin est correct
             (object) => {
                 object.scale.set(0.005, 0.005, 0.0005); // Ajustez si nécessaire
 
@@ -64,7 +64,7 @@ const VaisseauSpatial = ({ onClick }) => {
         scene.add(backLight);
 
         // Positionner la caméra
-        camera.position.z = 380;
+        camera.position.z = 500;
 
         // Animation
         const animate = () => {
@@ -81,7 +81,6 @@ const VaisseauSpatial = ({ onClick }) => {
                 const t = timeRef.current;
                 const x = a * Math.sin(t);
                 const y = b * Math.sin(t) * Math.cos(t);
-                const z = b * Math.sin(t) * Math.sin(t);
                 animationRef.current.position.set(x, y, 0);
 
                 // Orientation du vaisseau dans la direction du mouvement
