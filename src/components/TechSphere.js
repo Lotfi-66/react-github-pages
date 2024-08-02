@@ -97,7 +97,7 @@ const TechSphere = () => {
         // Animation des icônes
         const icons = container.querySelectorAll('.icon');
         const totalIcons = icons.length;
-        const radius = 2.5;
+        const radius = 1.2;
 
         let angle = 0;
         const angleStep = (2 * Math.PI) / totalIcons;
@@ -109,7 +109,7 @@ const TechSphere = () => {
                 const x = radius * Math.cos(angle + i * angleStep);
                 const y = radius * Math.sin(angle + i * angleStep);
                 const z = radius * Math.sin(angle + i * angleStep) * 0.3;
-                icon.style.transform = `translate3d(${x * 150}px, ${(y + 2) * 100}px, ${z * 100}px) scale(0.7)`;
+                icon.style.transform = `translate3d(${x * 250}px, ${(y + 2) * 80}px, ${z * 200}px) scale(0.7)`;
             }
         };
 
