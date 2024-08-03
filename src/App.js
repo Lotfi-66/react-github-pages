@@ -17,24 +17,14 @@ function App() {
                     de créer des applications web complètes et performantes.
                 </p>
             </header>
-            <main className="main-content">
-                <div className="content-wrapper">
-                    <div className="center-column">
-                        <TechSphere />
-                    </div>
-                    <div className="left-column">
-                        <section className="projects-section">
-                            <h2>Mes projets</h2>
-                            <ul>
-                                <li>Projet 1 - Application React avec backend PHP</li>
-                                <li>Projet 2 - Site e-commerce en JavaScript et Bootstrap</li>
-                                <li>Projet 3 - API RESTful en PHP orienté objet</li>
-                            </ul>
-                        </section>
-                    </div>
-                </div>
-                <VaisseauSpatial />
-            </main>
+            <div className="TechSphere">
+            <TechSphere />
+            </div>
+            <div className="projects-column">
+                <section className="projects-section">
+                </section>
+            </div>
+            <VaisseauSpatial />
         </div>
     );
 }

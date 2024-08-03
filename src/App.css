@@ -3,12 +3,10 @@
     src: url('fonts/Futurama bold.ttf') format('truetype');
 }
 
-html,
 body {
     margin: 0;
-    padding: 0;
     font-family: 'Futurama', sans-serif;
-    color: #ffffff;
+    color: #fff;
     background-color: transparent;
     line-height: 1.6;
     overflow: hidden;
@@ -24,8 +22,11 @@ body {
     position: relative;
     z-index: 1;
     overflow-y: auto;
-    -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+.App::-webkit-scrollbar {
+    display: none;
 }
 
 .App-header {
@@ -34,8 +35,6 @@ body {
     left: 20px;
     padding: 20px;
     max-width: 300px;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
     z-index: 1000;
     text-align: left;
     border-radius: 10px;
@@ -47,27 +46,8 @@ body {
     letter-spacing: 2px;
 }
 
-.App-header p {
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-.subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    color: #cccccc;
-}
-
-h2 {
-    font-size: 2rem;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ffffff;
-    padding-bottom: 10px;
-}
-
 .main-content {
-    flex-grow: 1;
+    flex-grow: 2;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -78,80 +58,34 @@ h2 {
 
 .content-wrapper {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
     width: 100%;
 }
 
-.center-column {
-    flex-grow: 2;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    height: 500px;
-    width: 500px;
-
-}
-
-.left-column,
-.right-column {
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    margin: 20px;
-    border-radius: 10px;
-}
-
-.left-column {
-    width: 300px;
-    align-self: flex-end;
-}
-
-.right-column {
-    width: 35%;
-    position: fixed;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    max-height: 80vh;
-    overflow-y: auto;
-}
-
-
-
 .tech-sphere-container {
     position: relative;
     width: 100%;
     height: 100%;
-    margin: 0 auto;
-    overflow: visible !important;
+    overflow: visible;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
-    padding-bottom: 50px;
+    align-items: center;
 }
 
 .tech-sphere {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
     height: 100%;
+    padding-bottom: 1350px;
 }
 
 .tech-sphere .icon {
     position: absolute;
-    font-size: 24px;
+    font-size: 20px;
     transition: transform 0.1s ease-out;
     color: #fff;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-}
-
-p {
-    font-size: 20px;
-    line-height: 1.5;
-    margin-bottom: 20px;
 }
 
 .projects-section {
@@ -163,69 +97,7 @@ p {
     box-sizing: border-box;
 }
 
-/* Masquer la barre de défilement pour Chrome, Safari et Opera */
-.App::-webkit-scrollbar {
-    display: none;
-}
-
-/* Ajustez la position du vaisseau spatial */
-.vaisseau-spatial {
-    position: absolute;
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-@media (max-width: 1024px) {
-    .content-wrapper {
-        flex-direction: column;
-    }
-
-    .left-column,
-    .right-column {
-        width: 100%;
-        position: static;
-        transform: none;
-        max-height: none;
-    }
-
-    .right-column {
-        margin-top: 20px;
-        overflow-y: visible;
-    }
-
-    .App-header {
-        position: static;
-        max-width: none;
-        margin-bottom: 20px;
-    }
-}
-
 @media (max-width: 768px) {
-    .main-content {
-        padding-bottom: 20px;
-    }
-
-    .left-column,
-    .right-column {
-        margin: 10px 0;
-    }
-
-    .skills {
-        flex-direction: column;
-        gap: 10px;
-        font-size: 1.5rem;
-    }
-
-    .social-links {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .social-links a {
-        font-size: 1rem;
-    }
-
     .App-header h1 {
         font-size: 20px;
     }
@@ -240,5 +112,26 @@ p {
 
     p {
         font-size: 16px;
+    }
+    .icon {
+        position: absolute;
+        transition: transform 0.09s ease-out;
+        top: -230px;
+    }
+    .tech-sphere {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    .tech-sphere-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        overflow: visible;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        
     }
 }
