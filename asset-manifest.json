@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/react-github-pages/static/css/main.adc8d884.css",
-    "main.js": "/react-github-pages/static/js/main.938bf6e4.js",
+    "main.js": "/react-github-pages/static/js/main.f72d3f06.js",
     "static/media/Futurama bold.ttf": "/react-github-pages/static/media/Futurama bold.16d551eda9703cd59de7.ttf",
     "index.html": "/react-github-pages/index.html",
     "main.adc8d884.css.map": "/react-github-pages/static/css/main.adc8d884.css.map",
-    "main.938bf6e4.js.map": "/react-github-pages/static/js/main.938bf6e4.js.map"
+    "main.f72d3f06.js.map": "/react-github-pages/static/js/main.f72d3f06.js.map"
   },
   "entrypoints": [
     "static/css/main.adc8d884.css",
-    "static/js/main.938bf6e4.js"
+    "static/js/main.f72d3f06.js"
   ]
 }
