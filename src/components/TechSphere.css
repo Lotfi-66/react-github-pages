@@ -16,10 +16,11 @@
     height: 100%;
 }
 
-.icon {
+.tech-sphere .icon {
     position: absolute;
     transition: transform 0.1s ease-out;
     top: -300px;
     left: 33px;
-    color: blue; /* Changez la couleur des icônes en bleu */
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }

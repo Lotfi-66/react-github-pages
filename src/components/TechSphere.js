@@ -18,12 +18,10 @@ const TechSphere = React.memo(() => {
         const camera = new THREE.OrthographicCamera(
             frustumSize * aspect / -2, frustumSize * aspect / 2,
             frustumSize / 2, frustumSize / -2,
-            0.12, 1000
+            0.9, 1000
         );
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.shadowMap.enabled = true;
-        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         container.appendChild(renderer.domElement);
 
         // Création de la Terre
@@ -39,7 +37,7 @@ const TechSphere = React.memo(() => {
         earth.castShadow = true;
         earth.receiveShadow = true;
         earth.position.y = isMobile ? 0.5 : 1;
-        earth.rotation.z = THREE.MathUtils.degToRad(20.5);
+        earth.rotation.z = THREE.MathUtils.degToRad(23.5); // Inclinaison réaliste de la Terre
         scene.add(earth);
 
         // Création de la Lune
@@ -52,18 +50,18 @@ const TechSphere = React.memo(() => {
             metalness: 0
         });
         const moon = new THREE.Mesh(moonGeometry, moonMaterial);
-        moon.castShadow = true;
+        moon.castShadow = false; // La Lune ne doit pas projeter d'ombre sur la Terre
         moon.receiveShadow = true;
         scene.add(moon);
 
         // Lumières
-        const sunLight = new THREE.DirectionalLight(0xFFFFFF, 3);
-        sunLight.position.set(5, 1, 5);
+        const sunLight = new THREE.DirectionalLight(0xFFFFFF, 1.5);
+        sunLight.position.set(10, 10, 10); // Position réaliste pour simuler le soleil
         sunLight.castShadow = true;
-        sunLight.shadow.mapSize.width = 1924;
-        sunLight.shadow.mapSize.height = 1824;
+        sunLight.shadow.mapSize.width = 2048;
+        sunLight.shadow.mapSize.height = 2048;
         sunLight.shadow.camera.near = 1;
-        sunLight.shadow.camera.far = 20;
+        sunLight.shadow.camera.far = 50;
         scene.add(sunLight);
 
         const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
@@ -82,9 +80,9 @@ const TechSphere = React.memo(() => {
         const moonOrbitSpeed = 0.001;
         const animateMoon = () => {
             moonAngle += moonOrbitSpeed;
-            const moonX = Math.sin(moonAngle) * moonOrbitRadius * 3.5;
-            const moonY = Math.cos(moonAngle) * moonOrbitRadius * 3.5;
-            const moonZ = Math.cos(moonAngle) * moonOrbitRadius * 2.5;
+            const moonX = Math.sin(moonAngle) * moonOrbitRadius * 3.76;
+            const moonY = Math.cos(moonAngle) * moonOrbitRadius * 3.1;
+            const moonZ = Math.cos(moonAngle) * moonOrbitRadius * 2.5; // Ajustement pour une orbite plus réaliste
             moon.position.set(earth.position.x + moonX, earth.position.y + moonY, earth.position.z + moonZ);
             moon.rotation.y += 0.01;
         };
@@ -96,7 +94,7 @@ const TechSphere = React.memo(() => {
         const angleStep = (2 * Math.PI) / totalIcons;
 
         const animateIcons = () => {
-            angle += 0.005;
+            angle += 0.002;
             icons.forEach((icon, i) => {
                 const x = radius * Math.cos(angle + i * angleStep);
                 const y = radius * Math.sin(angle + i * angleStep);

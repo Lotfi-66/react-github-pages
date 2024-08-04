@@ -31,19 +31,25 @@ body {
 
 .App-header {
     position: fixed;
-    top: 20px;
-    left: 20px;
+    top: 350px;
     padding: 20px;
-    max-width: 300px;
-    z-index: 1000;
+    max-width: 500px;
     text-align: left;
     border-radius: 10px;
+    z-index: -1;
 }
 
 .App-header h1 {
-    font-size: 24px;
+    font-size: 44px;
     margin-bottom: 10px;
     letter-spacing: 2px;
+}
+
+.App-header p {
+    font-size: 22px;
+    line-height: 1.9;
+    letter-spacing: 1.3px;
+    cursor: pointer;
 }
 
 .main-content {
