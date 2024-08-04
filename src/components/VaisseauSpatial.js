@@ -58,15 +58,15 @@ END:VCARD`;
 
         const mtlLoader = new MTLLoader();
         mtlLoader.load(
-            process.env.PUBLIC_URL + '/models/Satellite.mtl',
+            process.env.PUBLIC_URL + '/models/SpaceShip.mtl',
             (materials) => {
                 materials.preload();
                 const objLoader = new OBJLoader();
                 objLoader.setMaterials(materials);
                 objLoader.load(
-                    process.env.PUBLIC_URL + '/models/Satellite.obj',
+                    process.env.PUBLIC_URL + '/models/SpaceShip.obj',
                     (object) => {
-                        object.scale.set(10, 10, 10);
+                        object.scale.set(20, 20, 20);
                         object.position.set(0, 0, 0);
                         scene.add(object);
                         animationRef.current = object;
@@ -103,7 +103,7 @@ END:VCARD`;
         directionalLight.position.set(5, 10, 7.5);
         scene.add(directionalLight);
 
-        camera.position.z = 550;
+        camera.position.z = 850;
 
         const animate = () => {
             requestAnimationFrame(animate);
@@ -111,16 +111,16 @@ END:VCARD`;
                 const elapsedTime = clock.getElapsedTime();
 
                 const a = 640;
-                const b = 540;
-                const omega = 0.6;
+                const b = 440;
+                const omega = Math.PI / 30;
 
                 animationRef.current.position.x = a * Math.sin(omega * elapsedTime);
                 animationRef.current.position.y = b * Math.sin(omega * elapsedTime) * Math.cos(omega * elapsedTime);
-                animationRef.current.position.z = 100 * Math.sin(omega * elapsedTime);
+                animationRef.current.position.z = 10 * Math.sin(omega * elapsedTime);
 
-                animationRef.current.rotation.x += 0.0001;
+                animationRef.current.rotation.x += 0.0007;
                 animationRef.current.rotation.y += 0.002;
-                animationRef.current.rotation.z += 0.005;
+                animationRef.current.rotation.z += 0.002;
 
                 clickableBoxRef.current.position.copy(animationRef.current.position);
                 clickableBoxRef.current.rotation.copy(animationRef.current.rotation);
