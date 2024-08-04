@@ -12,7 +12,7 @@ const VaisseauSpatial = () => {
     const cameraRef = useRef(null);
     const clickableBoxRef = useRef(null);
     const boxSizeRef = useRef(new THREE.Vector3());
-    const clock = new THREE.Clock();
+    const clock = useRef(new THREE.Clock());
 
     const openEmailClient = useCallback(() => {
         const email = 'lotfi.djeg@gmail.com';
@@ -108,7 +108,7 @@ END:VCARD`;
         const animate = () => {
             requestAnimationFrame(animate);
             if (animationRef.current && clickableBoxRef.current) {
-                const elapsedTime = clock.getElapsedTime();
+                const elapsedTime = clock.current.getElapsedTime();
 
                 const a = 640;
                 const b = 440;
