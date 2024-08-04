@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import StarryBackground from './StarryBackground';
+import StarryBackground from './components/StarryBackground';
 import TechSphere from './components/TechSphere';
-import VaisseauSpatial from './VaisseauSpatial';
-import TypewriterText from './TypewriterText';
+import VaisseauSpatial from './components/VaisseauSpatial';
+import TypewriterText from './components/TypewriterText';
 import { 
     ProjectsSection, 
     ProjectTitle, 
@@ -14,9 +14,9 @@ import {
     CloseButton,
     StyledHeader, 
     StyledTitle, 
-    StyledHeaderText 
-} from './StyledComponents';
-import './App.css';
+    StyledHeaderText,
+} from './components/StyledComponents';
+import './css/App.css';
 
 function App() {
     const [showSecondText, setShowSecondText] = useState(false);
@@ -26,21 +26,21 @@ function App() {
         { 
             name: 'DragonBall Api', 
             description: 'Description du projet 1',
-            image: process.env.PUBLIC_URL + '/DBZAPI.png',
+            image: process.env.PUBLIC_URL + '/img/DBZAPI.png',
             fullDescription: 'Description complète du projet 1',
             creationDate: '01/01/2023'
         },
         { 
             name: 'Airbnb Clone', 
             description: 'Description du projet 2',
-            image: process.env.PUBLIC_URL + '/Airbnb_clone.png',
+            image: process.env.PUBLIC_URL + '/img/Airbnb_clone.png',
             fullDescription: 'Description complète du projet 2',
             creationDate: '01/03/2023'
         },
         { 
             name: 'Papa Pizza', 
             description: 'Description du projet 3',
-            image: process.env.PUBLIC_URL + '/PapaPizza.png', // Chemin correct pour l'image
+            image: process.env.PUBLIC_URL + '/img/PapaPizza.png',
             fullDescription: 'Description complète du projet 3',
             creationDate: '01/06/2023'
         },
@@ -73,11 +73,9 @@ de créer des applications web complètes et performantes.`;
                     {showSecondText && <TypewriterText text={additionalText} speed={30} />}
                 </StyledHeaderText>
             </StyledHeader>
-            
-            <div className="TechSphere">
-                <TechSphere />
-            </div>
-            
+                <div className="TechSphere">
+                    <TechSphere />
+                </div>
             <ProjectsSection>
                 <ProjectTitle>Mes Projets</ProjectTitle>
                 <ProjectList>

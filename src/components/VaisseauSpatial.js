@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-import './VaisseauSpatial.css';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
+import '../css/VaisseauSpatial.css';
 
 const VaisseauSpatial = () => {
     const [showContact, setShowContact] = useState(false);
@@ -11,9 +12,7 @@ const VaisseauSpatial = () => {
     const cameraRef = useRef(null);
     const clickableBoxRef = useRef(null);
     const boxSizeRef = useRef(new THREE.Vector3());
-    const velocityRef = useRef(new THREE.Vector3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5));
-    const speed = 0.1; // Vitesse du vaisseau
-    const changeDirectionInterval = 5000; // Intervalle pour changer la direction en millisecondes
+    const clock = new THREE.Clock();
 
     const openEmailClient = useCallback(() => {
         const email = 'lotfi.djeg@gmail.com';
@@ -23,10 +22,9 @@ const VaisseauSpatial = () => {
     }, []);
 
     const openWhatsApp = useCallback(() => {
-        const phoneNumber = '+33645848853'; // Numéro de téléphone avec le code du pays
+        const phoneNumber = '+33645848853';
         const message = 'Bonjour, je vous contacte depuis votre site web.';
-        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
+        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
     }, []);
 
     const saveContact = useCallback(() => {
@@ -39,11 +37,7 @@ END:VCARD`;
         const blob = new Blob([vCardData], { type: 'text/vcard' });
         const url = URL.createObjectURL(blob);
 
-        if (/Mobi|Android/i.test(navigator.userAgent)) {
-            window.location.href = url;
-        } else {
-            window.open(url, '_blank');
-        }
+        window.open(url, '_blank');
     }, []);
 
     const toggleContactInfo = useCallback(() => {
@@ -54,52 +48,46 @@ END:VCARD`;
         const mountNode = mountRef.current;
         const scene = new THREE.Scene();
         sceneRef.current = scene;
+
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         cameraRef.current = camera;
+
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         mountNode.appendChild(renderer.domElement);
 
-        // Charger le modèle 3D du vaisseau spatial
-        const objLoader = new OBJLoader();
-        objLoader.load(
-            process.env.PUBLIC_URL + '/models/SpaceShip.obj',
-            (object) => {
-                object.scale.set(5, 4, 8); // Ajustez l'échelle si nécessaire
-                object.position.set(0, 0, 0); // Assurez-vous que le modèle est positionné correctement
-                object.traverse((child) => {
-                    if (child instanceof THREE.Mesh) {
-                        child.material = new THREE.MeshStandardMaterial({
-                            metalness: 0.1,
-                            roughness: 0.1,
-                            envMapIntensity: 1,
-                        });
-                    }
-                });
-                scene.add(object);
-                animationRef.current = object;
+        const mtlLoader = new MTLLoader();
+        mtlLoader.load(
+            process.env.PUBLIC_URL + '/models/Satellite.mtl',
+            (materials) => {
+                materials.preload();
+                const objLoader = new OBJLoader();
+                objLoader.setMaterials(materials);
+                objLoader.load(
+                    process.env.PUBLIC_URL + '/models/Satellite.obj',
+                    (object) => {
+                        object.scale.set(10, 10, 10);
+                        object.position.set(0, 0, 0);
+                        scene.add(object);
+                        animationRef.current = object;
 
-                // Calculer la boîte englobante du vaisseau
-                const vaisseauBoundingBox = new THREE.Box3().setFromObject(object);
-                boxSizeRef.current = vaisseauBoundingBox.getSize(new THREE.Vector3());
+                        const vaisseauBoundingBox = new THREE.Box3().setFromObject(object);
+                        boxSizeRef.current = vaisseauBoundingBox.getSize(new THREE.Vector3());
 
-                // Créer une boîte cliquable invisible autour du vaisseau
-                const boxGeometry = new THREE.BoxGeometry(boxSizeRef.current.x, boxSizeRef.current.y, boxSizeRef.current.z);
-                const boxMaterial = new THREE.MeshBasicMaterial({ visible: false });
-                const clickableBox = new THREE.Mesh(boxGeometry, boxMaterial);
-                clickableBox.position.copy(object.position);
-                scene.add(clickableBox);
-                clickableBoxRef.current = clickableBox;
+                        const boxGeometry = new THREE.BoxGeometry(boxSizeRef.current.x, boxSizeRef.current.y, boxSizeRef.current.z);
+                        const boxMaterial = new THREE.MeshBasicMaterial({ visible: false });
+                        const clickableBox = new THREE.Mesh(boxGeometry, boxMaterial);
+                        clickableBox.position.copy(object.position);
+                        scene.add(clickableBox);
+                        clickableBoxRef.current = clickableBox;
+                    },
+                    (xhr) => console.log(`${(xhr.loaded / xhr.total * 100).toFixed(0)}% chargé`),
+                    (error) => console.error('Erreur lors du chargement du modèle', error)
+                );
             },
-            (xhr) => {
-                console.log((xhr.loaded / xhr.total * 100) + '% chargé');
-            },
-            (error) => {
-                console.error('Une erreur s\'est produite lors du chargement du modèle', error);
-            }
+            (error) => console.error('Erreur lors du chargement des matériaux', error)
         );
 
-        // Lumières
         const ambientLight = new THREE.AmbientLight(0x404040, 0.9);
         scene.add(ambientLight);
 
@@ -111,35 +99,30 @@ END:VCARD`;
         backLight.position.set(-1, 1, 1);
         scene.add(backLight);
 
-        camera.position.z = 190; // Ajustez la position de la caméra si nécessaire
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(5, 10, 7.5);
+        scene.add(directionalLight);
+
+        camera.position.z = 550;
 
         const animate = () => {
             requestAnimationFrame(animate);
             if (animationRef.current && clickableBoxRef.current) {
-                // Mise à jour de la position du vaisseau
-                const position = animationRef.current.position;
-                const velocity = velocityRef.current;
+                const elapsedTime = clock.getElapsedTime();
 
-                // Déplacer le vaisseau
-                position.addScaledVector(velocity, speed);
+                const a = 640;
+                const b = 540;
+                const omega = 0.6;
 
-                // Changer la direction du vaisseau de manière aléatoire à intervalles réguliers
-                if (performance.now() % changeDirectionInterval < 16) { // 16 ms pour une mise à jour approximative toutes les 5000 ms
-                    velocityRef.current = new THREE.Vector3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
-                }
+                animationRef.current.position.x = a * Math.sin(omega * elapsedTime);
+                animationRef.current.position.y = b * Math.sin(omega * elapsedTime) * Math.cos(omega * elapsedTime);
+                animationRef.current.position.z = 100 * Math.sin(omega * elapsedTime);
 
-                // Limiter la position du vaisseau à l'intérieur de l'écran
-                const width = window.innerWidth;
-                const height = window.innerHeight;
-                const depth = 200; // Définir la profondeur de l'animation
-                position.x = Math.max(-width / 2, Math.min(width / 2, position.x));
-                position.y = Math.max(-height / 2, Math.min(height / 2, position.y));
-                position.z = Math.max(-depth / 2, Math.min(depth / 2, position.z));
+                animationRef.current.rotation.x += 0.0001;
+                animationRef.current.rotation.y += 0.002;
+                animationRef.current.rotation.z += 0.005;
 
-                // Ajouter une légère rotation sur l'axe Y pour un effet visuel
-                animationRef.current.rotation.y += 0.0001;
-
-                clickableBoxRef.current.position.copy(position);
+                clickableBoxRef.current.position.copy(animationRef.current.position);
                 clickableBoxRef.current.rotation.copy(animationRef.current.rotation);
             }
             renderer.render(scene, camera);

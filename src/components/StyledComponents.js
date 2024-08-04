@@ -6,12 +6,20 @@ export const ProjectsSection = styled.section`
     color: white;
     border-radius: 10px;
     position: absolute;
-    top: 50px;
+    top: 40px;
     right: 25px;
     width: 350px;
     max-height: 100vh;
     overflow-y: auto;
     z-index: -1; // Changé de -1 à 1 pour être visible
+
+    @media (max-width: 480px) {
+        width: 360px;
+        top: 600px;
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+    }
 `;
 
 export const ProjectTitle = styled.h2`
@@ -19,6 +27,11 @@ export const ProjectTitle = styled.h2`
     margin-bottom: 20px;
     text-align: center;
     color: #FFD700; /* Gold color */
+
+    @media (max-width: 480px) {
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
 `;
 
 export const ProjectList = styled.ul`
@@ -32,6 +45,11 @@ export const ProjectItem = styled.li`
     background: rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+
+    @media (max-width: 480px) {
+        margin: 15px 0;
+        padding: 4px;
+    }
 `;
 
 export const ProjectImage = styled.img`
@@ -63,8 +81,8 @@ export const Modal = styled.div`
 
 export const ModalContent = styled.div`
     background-color: #fff;
-    padding: 5px;
-    border-radius: 60px;
+    padding: 20px;
+    border-radius: 10px;
     max-width: 500px;
     width: 90%;
     color: #000;
@@ -78,7 +96,7 @@ export const CloseButton = styled.button`
     border: none;
     font-size: 1.5em;
     cursor: pointer;
-    color: #fff;
+    color: #000;
 `;
 
 export const StyledHeader = styled.header`
@@ -89,6 +107,12 @@ export const StyledHeader = styled.header`
     padding: 20px;
     max-width: 400px;
     z-index: -1;
+
+    @media (max-width: 480px) {
+        left: 10px;
+        right: 10px;
+        top: 110px;
+    }
 `;
 
 export const StyledTitle = styled.h1`
@@ -96,10 +120,21 @@ export const StyledTitle = styled.h1`
     font-size: 2.5em;
     margin-bottom: 35px;
     color: #FFD700;
+
+    @media (max-width: 480px) {
+        font-size: 3em;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+    }
 `;
 
 export const StyledHeaderText = styled.div`
     font-size: 1.5em;
     line-height: 1.09;
     color: white;
+
+    @media (max-width: 480px) {
+        font-size: 1.1em;
+        letter-spacing: 1px;
+    }
 `;

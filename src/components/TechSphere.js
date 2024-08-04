@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FaReact, FaJs, FaPhp, FaBootstrap, FaGithub, FaFigma, FaLinux, FaCss3Alt, FaHtml5, FaCube, FaCode, FaTerminal } from 'react-icons/fa';
 import * as THREE from 'three';
-import './TechSphere.css';
+import '../css/TechSphere.css';
 
 const TechSphere = React.memo(() => {
     const containerRef = useRef(null);
