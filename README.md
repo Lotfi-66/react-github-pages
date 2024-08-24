@@ -72,3 +72,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 npm install styled-components
 npm install styled-components
+
+
+
+# lancer le projet
+** intaller npm **
+``bash
+npm install
+``
+
+** lancer le projet **
+``bash
+npm start
+```
