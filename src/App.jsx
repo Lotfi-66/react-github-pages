@@ -22,6 +22,7 @@ import './css/App.css';
 function App() {
     const [showSecondText, setShowSecondText] = useState(false);
     const [selectedProject, setSelectedProject] = useState(null);
+
     useEffect(() => {
         // Désactiver le zoom par geste tactile
         document.addEventListener('gesturestart', function (e) {
@@ -87,13 +88,9 @@ function App() {
         },
     ];
 
-    const headerText = `J'ai 21 ans, je suis un développeur
-web fullstack passionné.
-Je suis en cours de maîtrise du front-end, back-end, ce qui me permet
-de créer des applications web complètes et performantes.`;
+    const headerText = `J'ai 21 ans, je suis un développeur web fullstack passionné. Je suis en cours de maîtrise du front-end, back-end, ce qui me permet de créer des applications web complètes et performantes.`;
 
     const additionalText = `Pour me contacter CLIQUEZ SUR le Vaisseau Spatial.`;
-
 
     const delay = headerText.length * 30 + 1000;
     useEffect(() => {

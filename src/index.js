@@ -9,7 +9,7 @@ const root = createRoot(rootElement);
 
 // Utilisez la méthode render de la racine créée
 root.render(
-  <React.StrictMode>
+    <React.StrictMode>
     <App />
-  </React.StrictMode>
+    </React.StrictMode>
 );

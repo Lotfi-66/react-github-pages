@@ -2,8 +2,16 @@ import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
     body {
+    margin: 0;
+    padding: 0;
     min-height: 100vh;
-    overflow-y: auto;
+    
+    @media (min-width: 1024px) {
+        overflow: hidden;
+    }
+
+    @media (max-width: 1023px) {
+        overflow-y: auto;
     }
 `;
 
@@ -23,7 +31,7 @@ export const ProjectsSection = styled.section`
     @media (max-width: 480px) {
     
         width: 360px;
-        top: 600px;
+        top: 650px;
         right: 0;
         left: 0;
         margin: 0 auto;
