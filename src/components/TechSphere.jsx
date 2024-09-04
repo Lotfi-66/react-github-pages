@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { FaReact, FaJs, FaPhp, FaBootstrap, FaGithub, FaFigma, FaLinux, FaCss3Alt, FaHtml5, FaCube, FaCode, FaTerminal } from 'react-icons/fa';
 import * as THREE from 'three';
 import '../css/TechSphere.css';
@@ -8,16 +8,47 @@ const TechSphere = React.memo(() => {
     const animationRef = useRef(null);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
+    const config = useMemo(() => ({
+        // Taille de la vue de la caméra, plus grande sur mobile pour un champ de vision plus large
+        frustumSize: isMobile ? 15 : 10,
+    
+        // Échelle de la Terre, légèrement plus petite sur mobile pour s'adapter à l'écran
+        earthScale: isMobile ? 0.8 : 1.24,
+    
+        // Position verticale de la Terre, ajustée pour la vue mobile
+        earthPositionY: isMobile ? 0.5 : 1,
+    
+        // Échelle de la Lune, réduite sur mobile pour maintenir les proportions
+        moonScale: isMobile ? 0.15 : 0.25,
+    
+        // Rayon de l'orbite de la Lune, plus petit sur mobile pour rester dans le champ de vision
+        moonOrbitRadius: isMobile ? 1.5 : 2,
+    
+        // Rayon du cercle sur lequel les icônes sont placées, réduit sur mobile
+        iconRadius: isMobile ? 2.8 * 0.7 : 2.8,
+    
+        // Échelle des icônes, légèrement plus petite sur mobile
+        iconScale: isMobile ? 0.7 : 0.8,
+    
+        // Décalage horizontal des icônes, utilisé pour ajuster leur position sur mobile
+        iconOffsetX: isMobile ? -10 : 0,
+    
+        // Facteur de translation horizontale pour le positionnement des icônes
+        iconTranslateX: isMobile ? 70 : 100,
+    
+        // Facteur de translation verticale pour le positionnement des icônes
+        iconTranslateY: isMobile ? 10 : 15,
+    }), [isMobile]);
+
     useEffect(() => {
         const container = containerRef.current;
         if (!container) return;
 
         const scene = new THREE.Scene();
         const aspect = container.clientWidth / container.clientHeight;
-        const frustumSize = isMobile ? 15 : 10;
         const camera = new THREE.OrthographicCamera(
-            frustumSize * aspect / -2, frustumSize * aspect / 2,
-            frustumSize / 2, frustumSize / -2,
+            config.frustumSize * aspect / -2, config.frustumSize * aspect / 2,
+            config.frustumSize / 2, config.frustumSize / -2,
             0.9, 1000
         );
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -25,8 +56,7 @@ const TechSphere = React.memo(() => {
         container.appendChild(renderer.domElement);
 
         // Création de la Terre
-        const earthScale = isMobile ? 0.8 : 1.24;
-        const earthGeometry = new THREE.SphereGeometry(earthScale, 32, 32);
+        const earthGeometry = new THREE.SphereGeometry(config.earthScale, 32, 32);
         const earthTexture = new THREE.TextureLoader().load('https://live.staticflickr.com/2521/3884071286_0b6ddb55dd_h.jpg');
         const earthMaterial = new THREE.MeshStandardMaterial({
             map: earthTexture,
@@ -36,13 +66,12 @@ const TechSphere = React.memo(() => {
         const earth = new THREE.Mesh(earthGeometry, earthMaterial);
         earth.castShadow = true;
         earth.receiveShadow = true;
-        earth.position.y = isMobile ? 0.5 : 1;
-        earth.rotation.z = THREE.MathUtils.degToRad(23.5); // Inclinaison réaliste de la Terre
+        earth.position.y = config.earthPositionY;
+        earth.rotation.z = THREE.MathUtils.degToRad(23.5);
         scene.add(earth);
 
         // Création de la Lune
-        const moonScale = isMobile ? 0.15 : 0.25;
-        const moonGeometry = new THREE.SphereGeometry(moonScale, 75, 75);
+        const moonGeometry = new THREE.SphereGeometry(config.moonScale, 75, 75);
         const moonTexture = new THREE.TextureLoader().load('https://qph.cf2.quoracdn.net/main-qimg-916f32b07154a07addd64550591ec418-lq');
         const moonMaterial = new THREE.MeshStandardMaterial({
             map: moonTexture,
@@ -50,13 +79,13 @@ const TechSphere = React.memo(() => {
             metalness: 0
         });
         const moon = new THREE.Mesh(moonGeometry, moonMaterial);
-        moon.castShadow = false; // La Lune ne doit pas projeter d'ombre sur la Terre
+        moon.castShadow = false;
         moon.receiveShadow = true;
         scene.add(moon);
 
         // Lumières
         const sunLight = new THREE.DirectionalLight(0xFFFFFF, 1.5);
-        sunLight.position.set(10, 10, 10); // Position réaliste pour simuler le soleil
+        sunLight.position.set(10, 10, 10);
         sunLight.castShadow = true;
         sunLight.shadow.mapSize.width = 2048;
         sunLight.shadow.mapSize.height = 2048;
@@ -76,37 +105,32 @@ const TechSphere = React.memo(() => {
         };
 
         let moonAngle = 0;
-        const moonOrbitRadius = isMobile ? 1.5 : 2;
         const moonOrbitSpeed = 0.001;
         const animateMoon = () => {
             moonAngle += moonOrbitSpeed;
-            const moonX = Math.sin(moonAngle) * moonOrbitRadius * 3.76;
-            const moonY = Math.cos(moonAngle) * moonOrbitRadius * 3.1;
-            const moonZ = Math.cos(moonAngle) * moonOrbitRadius * 2.5; // Ajustement pour une orbite plus réaliste
+            const moonX = Math.sin(moonAngle) * config.moonOrbitRadius * 3.76;
+            const moonY = Math.cos(moonAngle) * config.moonOrbitRadius * 3.1;
+            const moonZ = Math.cos(moonAngle) * config.moonOrbitRadius * 2.5;
             moon.position.set(earth.position.x + moonX, earth.position.y + moonY, earth.position.z + moonZ);
             moon.rotation.y += 0.01;
         };
 
         const icons = container.querySelectorAll('.icon');
         const totalIcons = icons.length;
-        const radius = isMobile ? 2 : 2.8;
         let angle = 0;
         const angleStep = (2 * Math.PI) / totalIcons;
 
         const animateIcons = () => {
             angle += 0.002;
             icons.forEach((icon, i) => {
-                const x = radius * Math.cos(angle + i * angleStep);
-                const y = radius * Math.sin(angle + i * angleStep);
-                const z = radius * Math.sin(angle + i * angleStep) * 3;
+                const x = config.iconRadius * Math.cos(angle + i * angleStep);
+                const y = config.iconRadius * Math.sin(angle + i * angleStep);
+                const z = config.iconRadius * Math.sin(angle + i * angleStep) * 3;
 
-                // Calculer le centre du conteneur
                 const centerX = container.clientWidth / 2;
                 const centerY = container.clientHeight / 2;
 
-                // Appliquer la transformation en tenant compte du centre
-                const scale = isMobile ? 0.7 : 0.9;
-                icon.style.transform = `translate3d(${x * 100 + centerX}px, ${y * 15 + centerY}px, ${z * 100}px) scale(${scale})`;
+                icon.style.transform = `translate3d(${x * config.iconTranslateX + centerX + config.iconOffsetX}px, ${y * config.iconTranslateY + centerY}px, ${z * 100}px) scale(${config.iconScale})`;
                 icon.style.zIndex = z > 0 ? 1 : -1;
             });
         };
@@ -145,7 +169,7 @@ const TechSphere = React.memo(() => {
             window.removeEventListener('resize', resizeHandler);
             container.removeChild(renderer.domElement);
         };
-    }, [isMobile]);
+    }, [isMobile, config]);
 
     return (
         <div className="tech-sphere-container" ref={containerRef}>

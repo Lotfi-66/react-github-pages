@@ -1,4 +1,11 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+
+export const GlobalStyle = createGlobalStyle`
+    body {
+    min-height: 100vh;
+    overflow-y: auto;
+    }
+`;
 
 export const ProjectsSection = styled.section`
     padding: 20px;
@@ -14,6 +21,7 @@ export const ProjectsSection = styled.section`
     z-index: -1; // Changé de -1 à 1 pour être visible
 
     @media (max-width: 480px) {
+    
         width: 360px;
         top: 600px;
         right: 0;
@@ -37,6 +45,7 @@ export const ProjectTitle = styled.h2`
 export const ProjectList = styled.ul`
     list-style: none;
     padding: 0;
+    
 `;
 
 export const ProjectItem = styled.li`

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
@@ -6,6 +6,16 @@ import '../css/VaisseauSpatial.css';
 
 const VaisseauSpatial = () => {
     const [showContact, setShowContact] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+    const config = useMemo(() => ({
+        scale: isMobile ? 15 : 20,
+        positionZ: isMobile ? 650 : 850,
+        orbitA: isMobile ? 480 : 640,
+        orbitB: isMobile ? 330 : 440,
+        rotationSpeed: isMobile ? 0.001 : 0.002,
+    }), [isMobile]);
+
     const mountRef = useRef(null);
     const animationRef = useRef(null);
     const sceneRef = useRef(null);
@@ -85,7 +95,6 @@ END:VCARD`;
                     (error) => console.error('Erreur lors du chargement du modèle', error)
                 );
             },
-            (error) => console.error('Erreur lors du chargement des matériaux', error)
         );
 
         const ambientLight = new THREE.AmbientLight(0x404040, 0.9);
