@@ -10,34 +10,36 @@ const TechSphere = React.memo(() => {
 
     const config = useMemo(() => ({
         // Taille de la vue de la caméra, plus grande sur mobile pour un champ de vision plus large
-        frustumSize: isMobile ? 15 : 10,
-    
+        frustumSize: isMobile ? 1 : 1,
+
         // Échelle de la Terre, légèrement plus petite sur mobile pour s'adapter à l'écran
-        earthScale: isMobile ? 0.8 : 1.24,
-    
+        earthScale: isMobile ? 3.5 : 1.24,
+
         // Position verticale de la Terre, ajustée pour la vue mobile
         earthPositionY: isMobile ? 0.5 : 1,
-    
+
         // Échelle de la Lune, réduite sur mobile pour maintenir les proportions
-        moonScale: isMobile ? 0.15 : 0.25,
-    
+        moonScale: isMobile ? 0.9 : 0.25,
+
         // Rayon de l'orbite de la Lune, plus petit sur mobile pour rester dans le champ de vision
         moonOrbitRadius: isMobile ? 1.5 : 2,
-    
+
         // Rayon du cercle sur lequel les icônes sont placées, réduit sur mobile
-        iconRadius: isMobile ? 2.8 * 0.7 : 2.8,
-    
+        iconRadius: isMobile ? 5.5 * 0.7 : 2.8,
+
         // Échelle des icônes, légèrement plus petite sur mobile
-        iconScale: isMobile ? 0.7 : 0.8,
-    
+        iconScale: isMobile ? 1.5 : 0.8,
+
         // Décalage horizontal des icônes, utilisé pour ajuster leur position sur mobile
         iconOffsetX: isMobile ? -10 : 0,
-    
+
         // Facteur de translation horizontale pour le positionnement des icônes
         iconTranslateX: isMobile ? 70 : 100,
-    
+
         // Facteur de translation verticale pour le positionnement des icônes
-        iconTranslateY: isMobile ? 10 : 15,
+        iconTranslateY: isMobile ? 25 : 15,
+        // Nouveau décalage horizontal global
+        globalOffsetX: isMobile ? 2 : 3, // Ajustez ces valeurs selon vos besoins
     }), [isMobile]);
 
     useEffect(() => {

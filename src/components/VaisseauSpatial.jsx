@@ -6,15 +6,6 @@ import '../css/VaisseauSpatial.css';
 
 const VaisseauSpatial = () => {
     const [showContact, setShowContact] = useState(false);
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
-    const config = useMemo(() => ({
-        scale: isMobile ? 15 : 20,
-        positionZ: isMobile ? 650 : 850,
-        orbitA: isMobile ? 480 : 640,
-        orbitB: isMobile ? 330 : 440,
-        rotationSpeed: isMobile ? 0.001 : 0.002,
-    }), [isMobile]);
 
     const mountRef = useRef(null);
     const animationRef = useRef(null);

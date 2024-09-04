@@ -20,47 +20,57 @@ import {
 import './css/App.css';
 
 function App() {
+    console.log("App component rendered");
+
     const [showSecondText, setShowSecondText] = useState(false);
     const [selectedProject, setSelectedProject] = useState(null);
+    const [currentProject, setCurrentProject] = useState(0);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
 
     useEffect(() => {
-        // Désactiver le zoom par geste tactile
-        document.addEventListener('gesturestart', function (e) {
-            e.preventDefault();
-        });
+        console.log("App component mounted");
 
-        // Désactiver le zoom avec Ctrl +, Ctrl -, Ctrl 0
         const preventZoom = (e) => {
             if (e.ctrlKey && (e.key === '=' || e.key === '-' || e.key === '0')) {
                 e.preventDefault();
             }
         };
 
-        // Empêcher le zoom par double-tap sur mobile
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function (event) {
+        const preventDoubleTapZoom = (event) => {
             const now = new Date().getTime();
             if (now - lastTouchEnd <= 300) {
                 event.preventDefault();
             }
             lastTouchEnd = now;
-        }, false);
+        };
 
-        // Désactiver le zoom via le scroll de la molette
-        document.addEventListener('wheel', function (e) {
+        const preventWheelZoom = (e) => {
             if (e.ctrlKey) {
                 e.preventDefault();
             }
-        }, { passive: false });
+        };
 
-        // Ajouter les écouteurs d'événements pour les raccourcis clavier
+        let lastTouchEnd = 0;
+        document.addEventListener('gesturestart', e => e.preventDefault());
+        document.addEventListener('touchend', preventDoubleTapZoom, false);
+        document.addEventListener('wheel', preventWheelZoom, { passive: false });
         document.addEventListener('keydown', preventZoom);
 
+        const handleResize = () => {
+            const newIsMobile = window.innerWidth <= 480;
+            console.log('Window resized. Is mobile:', newIsMobile);
+            setIsMobile(newIsMobile);
+        };
+
+        handleResize(); // Log initial state
+        window.addEventListener('resize', handleResize);
+
         return () => {
-            document.removeEventListener('gesturestart', (e) => e.preventDefault());
+            document.removeEventListener('gesturestart', e => e.preventDefault());
+            document.removeEventListener('touchend', preventDoubleTapZoom);
+            document.removeEventListener('wheel', preventWheelZoom);
             document.removeEventListener('keydown', preventZoom);
-            document.removeEventListener('wheel', (e) => e.preventDefault());
-            document.removeEventListener('touchend', (e) => e.preventDefault());
+            window.removeEventListener('resize', handleResize);
         };
     }, []);
 
@@ -89,60 +99,95 @@ function App() {
     ];
 
     const headerText = `J'ai 21 ans, je suis un développeur web fullstack passionné. Je suis en cours de maîtrise du front-end, back-end, ce qui me permet de créer des applications web complètes et performantes.`;
-
     const additionalText = `Pour me contacter CLIQUEZ SUR le Vaisseau Spatial.`;
 
-    const delay = headerText.length * 30 + 1000;
     useEffect(() => {
         const timer = setTimeout(() => {
             setShowSecondText(true);
-        }, delay);
+            console.log("Second text shown");
+        }, headerText.length * 30 + 1000);
 
         return () => clearTimeout(timer);
-    }, [delay]);
+    }, [headerText.length]);
+
+    useEffect(() => {
+        console.log("Current project changed:", currentProject);
+    }, [currentProject]);
+
+    const handleTouchStart = (e) => {
+        const touchStartX = e.touches[0].clientX;
+        e.target.dataset.touchStartX = touchStartX;
+    };
+
+    const handleTouchMove = (e) => {
+        if (!e.target.dataset.touchStartX) return;
+        const touchEndX = e.touches[0].clientX;
+        const touchStartX = parseFloat(e.target.dataset.touchStartX);
+        if (touchStartX - touchEndX > 50) {
+            // Swipe Left
+            setCurrentProject((prev) => (prev + 1) % projects.length);
+            e.target.dataset.touchStartX = null;
+        } else if (touchEndX - touchStartX > 50) {
+            // Swipe Right
+            setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length);
+            e.target.dataset.touchStartX = null;
+        }
+    };
 
     return (
         <>
             <GlobalStyle />
             <div className="App">
-                <StarryBackground />
-                <StyledHeader>
-                    <StyledTitle>Djeghbala Lotfi</StyledTitle>
-                    <StyledHeaderText>
-                        <TypewriterText text={headerText} speed={30} />
-                        {showSecondText && <TypewriterText text={additionalText} speed={30} />}
-                    </StyledHeaderText>
-                </StyledHeader>
-                <div className="TechSphere">
-                    <TechSphere />
-                </div>
-                <ProjectsSection>
-                    <ProjectTitle>Mes Projets</ProjectTitle>
-                    <ProjectList>
-                        {projects.map((project, index) => (
-                            <ProjectItem key={index}>
-                                <h3>{project.name}</h3>
-                                <ProjectImage
-                                    src={project.image}
-                                    alt={project.name}
-                                    onClick={() => setSelectedProject(project)}
-                                />
-                            </ProjectItem>
-                        ))}
-                    </ProjectList>
-                </ProjectsSection>
-
+                <StarryBackground className="background" />
+                <header className="header">
+                    <StyledHeader>
+                        <StyledTitle className="title">Djeghbala Lotfi</StyledTitle>
+                        <StyledHeaderText className="header-text">
+                            <TypewriterText text={headerText} speed={30} className="typewriter" />
+                            {showSecondText && <TypewriterText text={additionalText} speed={30} className="typewriter additional" />}
+                        </StyledHeaderText>
+                    </StyledHeader>
+                </header>
+                <section className="tech-sphere-section">
+                    <div className="TechSphere">
+                        <TechSphere />
+                    </div>
+                </section>
+                <section className="projects-section">
+                    <ProjectsSection>
+                        <ProjectTitle className="section-title">Mes Projets</ProjectTitle>
+                        <ProjectList 
+                            className="project-list"
+                            style={{ transform: `translateX(-${currentProject * 100}%)`, transition: 'transform 0.3s ease' }}
+                            onTouchStart={handleTouchStart}
+                            onTouchMove={handleTouchMove}
+                        >
+                            {projects.map((project, index) => (
+                                <ProjectItem key={index} className="project-item">
+                                    <h3 className="project-name">{project.name}</h3>
+                                    <ProjectImage
+                                        className="project-image"
+                                        src={project.image}
+                                        alt={project.name}
+                                        onClick={() => setSelectedProject(project)}
+                                    />
+                                </ProjectItem>
+                            ))}
+                        </ProjectList>
+                    </ProjectsSection>
+                </section>
                 {selectedProject && (
-                    <Modal>
-                        <ModalContent>
-                            <h2>{selectedProject.name}</h2>
-                            <p>{selectedProject.fullDescription}</p>
-                            <p>Date de création : {selectedProject.creationDate}</p>
-                            <CloseButton onClick={() => setSelectedProject(null)}>×</CloseButton>
-                        </ModalContent>
-                    </Modal>
+                    <div className="modal-overlay">
+                        <Modal className="modal">
+                            <ModalContent className="modal-content">
+                                <h2 className="modal-title">{selectedProject.name}</h2>
+                                <p className="modal-description">{selectedProject.fullDescription}</p>
+                                <p className="modal-date">Date de création : {selectedProject.creationDate}</p>
+                                <CloseButton className="modal-close" onClick={() => setSelectedProject(null)}>×</CloseButton>
+                            </ModalContent>
+                        </Modal>
+                    </div>
                 )}
-
                 <VaisseauSpatial />
             </div>
         </>

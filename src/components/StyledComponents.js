@@ -29,12 +29,69 @@ export const ProjectsSection = styled.section`
     z-index: -1; // Changé de -1 à 1 pour être visible
 
     @media (max-width: 480px) {
-    
-        width: 360px;
+        width: 350px;
         top: 650px;
         right: 0;
         left: 0;
         margin: 0 auto;
+        overflow: hidden;
+
+    }
+`;
+
+export const ProjectsContainer = styled.div`
+    @media (max-width: 480px) {
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+`;
+
+export const ProjectList = styled.div`
+    list-style: none;
+    padding: 0;
+    @media (max-width: 480px) {
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+`;
+
+// export const ProjectItem = styled.div`
+//     margin: 10px;
+//     text-align: center;
+
+//     @media (max-width: 480px) {
+//         flex: 0 0 100%;
+//         margin: 0;
+//     }
+// `;
+
+export const ArrowButton = styled.button`
+    display: none; // Caché par défaut
+
+    @media (max-width: 480px) {
+        display: block;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.3);
+        border: none;
+        color: white;
+        font-size: 24px;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 2;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        &.left {
+            left: 0px;
+        }
+
+        &.right {
+            right: 0px;
+        }
     }
 `;
 
@@ -45,16 +102,16 @@ export const ProjectTitle = styled.h2`
     color: #FFD700; /* Gold color */
 
     @media (max-width: 480px) {
-        font-size: 2em;
-        margin-bottom: 10px;
+        font-size: 3em;
+        margin-bottom: 20px;
+        margin-top: 50px;
     }
 `;
 
-export const ProjectList = styled.ul`
-    list-style: none;
-    padding: 0;
-    
-`;
+// export const ProjectList = styled.ul`
+
+
+// `;
 
 export const ProjectItem = styled.li`
     margin: 30px 0;
@@ -64,8 +121,8 @@ export const ProjectItem = styled.li`
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 
     @media (max-width: 480px) {
-        margin: 15px 0;
-        padding: 4px;
+        width: 350px;
+        margin-right: 100px;
     }
 `;
 
@@ -80,6 +137,11 @@ export const ProjectImage = styled.img`
 
     &:hover {
         transform: scale(1.05);
+    }
+
+    @media (max-width: 480px) {
+        width: 300px;
+        height: 250px;
     }
 `;
 
@@ -126,9 +188,9 @@ export const StyledHeader = styled.header`
     z-index: -1;
 
     @media (max-width: 480px) {
-        left: 10px;
-        right: 10px;
-        top: 110px;
+        left: 0px;
+        right: 0px;
+        top: 80px;
     }
 `;
 
