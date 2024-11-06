@@ -20,56 +20,24 @@ import {
 import './css/App.css';
 
 function App() {
-    console.log("App component rendered");
-
-    const [showSecondText, setShowSecondText] = useState(false);
     const [selectedProject, setSelectedProject] = useState(null);
     const [currentProject, setCurrentProject] = useState(0);
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
+    // eslint-disable-next-line no-unused-vars
+    const [isMobile, setIsMobile] = useState(false);
+
+    const headerText = "J'ai 21 ans, je suis un développeur web fullstack passionné. Je suis en cours de maîtrise du front-end, back-end, ce qui me permet de créer des applications web complètes et performantes.";
+    const additionalText = "Pour me contacter CLIQUEZ SUR le Vaisseau Spatial.";
 
     useEffect(() => {
-        console.log("App component mounted");
-
-        const preventZoom = (e) => {
-            if (e.ctrlKey && (e.key === '=' || e.key === '-' || e.key === '0')) {
-                e.preventDefault();
-            }
-        };
-
-        const preventDoubleTapZoom = (event) => {
-            const now = new Date().getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        };
-
-        const preventWheelZoom = (e) => {
-            if (e.ctrlKey) {
-                e.preventDefault();
-            }
-        };
-
-        let lastTouchEnd = 0;
-        document.addEventListener('gesturestart', e => e.preventDefault());
-        document.addEventListener('touchend', preventDoubleTapZoom, false);
-        document.addEventListener('wheel', preventWheelZoom, { passive: false });
-        document.addEventListener('keydown', preventZoom);
-
         const handleResize = () => {
             const newIsMobile = window.innerWidth <= 480;
-            console.log('Window resized. Is mobile:', newIsMobile);
             setIsMobile(newIsMobile);
         };
 
-        handleResize(); // Log initial state
         window.addEventListener('resize', handleResize);
+        handleResize();
 
         return () => {
-            document.removeEventListener('gesturestart', e => e.preventDefault());
-            document.removeEventListener('touchend', preventDoubleTapZoom);
-            document.removeEventListener('wheel', preventWheelZoom);
-            document.removeEventListener('keydown', preventZoom);
             window.removeEventListener('resize', handleResize);
         };
     }, []);
@@ -80,39 +48,23 @@ function App() {
             description: 'Description du projet 1',
             image: process.env.PUBLIC_URL + '/img/DBZAPI.png',
             fullDescription: 'Description complète du projet 1',
-            creationDate: '01/01/2023'
+            creationDate: '01/01/2023',
         },
         {
             name: 'Airbnb Clone',
             description: 'Description du projet 2',
             image: process.env.PUBLIC_URL + '/img/Airbnb_clone.png',
             fullDescription: 'Description complète du projet 2',
-            creationDate: '01/03/2023'
+            creationDate: '01/03/2023',
         },
         {
             name: 'Papa Pizza',
             description: 'Description du projet 3',
             image: process.env.PUBLIC_URL + '/img/PapaPizza.png',
             fullDescription: 'Description complète du projet 3',
-            creationDate: '01/06/2023'
+            creationDate: '01/06/2023',
         },
     ];
-
-    const headerText = `J'ai 21 ans, je suis un développeur web fullstack passionné. Je suis en cours de maîtrise du front-end, back-end, ce qui me permet de créer des applications web complètes et performantes.`;
-    const additionalText = `Pour me contacter CLIQUEZ SUR le Vaisseau Spatial.`;
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setShowSecondText(true);
-            console.log("Second text shown");
-        }, headerText.length * 30 + 1000);
-
-        return () => clearTimeout(timer);
-    }, [headerText.length]);
-
-    useEffect(() => {
-        console.log("Current project changed:", currentProject);
-    }, [currentProject]);
 
     const handleTouchStart = (e) => {
         const touchStartX = e.touches[0].clientX;
@@ -124,11 +76,9 @@ function App() {
         const touchEndX = e.touches[0].clientX;
         const touchStartX = parseFloat(e.target.dataset.touchStartX);
         if (touchStartX - touchEndX > 50) {
-            // Swipe Left
             setCurrentProject((prev) => (prev + 1) % projects.length);
             e.target.dataset.touchStartX = null;
         } else if (touchEndX - touchStartX > 50) {
-            // Swipe Right
             setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length);
             e.target.dataset.touchStartX = null;
         }
@@ -143,8 +93,8 @@ function App() {
                     <StyledHeader>
                         <StyledTitle className="title">Djeghbala Lotfi</StyledTitle>
                         <StyledHeaderText className="header-text">
-                            <TypewriterText text={headerText} speed={30} className="typewriter" />
-                            {showSecondText && <TypewriterText text={additionalText} speed={30} className="typewriter additional" />}
+                            <TypewriterText text={headerText} speed={30} />
+                            <TypewriterText text={additionalText} speed={50} />
                         </StyledHeaderText>
                     </StyledHeader>
                 </header>
@@ -156,9 +106,12 @@ function App() {
                 <section className="projects-section">
                     <ProjectsSection>
                         <ProjectTitle className="section-title">Mes Projets</ProjectTitle>
-                        <ProjectList 
+                        <ProjectList
                             className="project-list"
-                            style={{ transform: `translateX(-${currentProject * 100}%)`, transition: 'transform 0.3s ease' }}
+                            style={{
+                                transform: `translateX(-${currentProject * 100}%)`,
+                                transition: 'transform 0.3s ease',
+                            }}
                             onTouchStart={handleTouchStart}
                             onTouchMove={handleTouchMove}
                         >
@@ -183,7 +136,9 @@ function App() {
                                 <h2 className="modal-title">{selectedProject.name}</h2>
                                 <p className="modal-description">{selectedProject.fullDescription}</p>
                                 <p className="modal-date">Date de création : {selectedProject.creationDate}</p>
-                                <CloseButton className="modal-close" onClick={() => setSelectedProject(null)}>×</CloseButton>
+                                <CloseButton className="modal-close" onClick={() => setSelectedProject(null)}>
+                                    ×
+                                </CloseButton>
                             </ModalContent>
                         </Modal>
                     </div>
