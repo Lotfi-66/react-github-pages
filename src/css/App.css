@@ -11,6 +11,7 @@ body {
     line-height: 1.6;
     overflow: hidden;
     touch-action: pan-x pan-y;
+    text-shadow: 0 0 5px #00ff00;
 }
 
 .App {
