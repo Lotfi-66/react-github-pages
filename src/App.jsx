@@ -25,7 +25,7 @@ function App() {
     // eslint-disable-next-line no-unused-vars
     const [isMobile, setIsMobile] = useState(false);
 
-    const headerText = "J'ai 21 ans, je suis un développeur web fullstack passionné. Je suis en cours de maîtrise du front-end, back-end, ce qui me permet de créer des applications web complètes et performantes.";
+    const headerText = "Je suis un développeur web fullstack passionné. Je suis en cours de maîtrise du front-end, back-end, ce qui me permet de créer des applications web complètes et performantes.";
     const additionalText = "Pour me contacter CLIQUEZ SUR le Vaisseau Spatial.";
 
     useEffect(() => {
@@ -91,7 +91,7 @@ function App() {
                 <StarryBackground className="background" />
                 <header className="header">
                     <StyledHeader>
-                        <StyledTitle className="title">Djeghbala Lotfi</StyledTitle>
+                        <StyledTitle className="title">Sku 07</StyledTitle>
                         <StyledHeaderText className="header-text">
                             <TypewriterText text={headerText} speed={30} />
                             <TypewriterText text={additionalText} speed={50} />
